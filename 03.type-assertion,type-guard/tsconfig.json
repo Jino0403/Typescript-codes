@@ -1,0 +1,36 @@
+// tsconfig.json 파일은 타입스크립트 => 자바스크립트 컴파일 할 때 필요한 설정이 담기는 파일
+// 이 파일에서 지금은 src안에 있는 main.ts 파일을 컴파일 한 후 build 폴더에 main.js가 담기게 해봄
+{
+    "compilerOptions": {
+        "rootDir": "./src",
+        //소스 파일 안에서 root 폴더를 명시
+        "outDir": "./build/js",
+        // 컴파일 한 후 어디로 자바스크립트 파일에 들어가게 되는지 명시
+        "target": "ES6",
+        // 컴파일 후 적용될 문법 명시, 기본은 ES3로 되어있고 let 사용시 처음 도입된 ES6(ES2015) 작성
+        "noEmitOnError": false,
+        // ts파일에 에러가 있을 때는 컴파일 하지 않는다는 옵션
+        "module": "ESNext",
+        // 컴파일을 마친 후 자바스크립트가 사용하는 모듈 시스템 ESNext는 es6 이후의 버전을 통틀어서 칭함
+        "moduleResolution": "Node",
+        // node와 classic이 있음
+        "esModuleInterop": true,
+        // es-module 시스템과 common.js를 호환하여 사용할 수 있게 해주는 옵션
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
+        // lib = library , 컴파일 과정에서 사용하는 library 지정옵션
+        "strict": true,
+        // typescript 파일의 type을 엄격하게 사용할건지 아닌지 설정하는 옵션
+        "strictNullChecks": true
+        // null과 undefined에 타입을 설정하게 되면 기본적으로 true가 되어있어서 오류가 뜨는데 false로 바꿔주면 할당가능
+    },
+    "include": [
+        "./src/**/*.ts",
+        // 바깥에서는 ts파일을 찾지 않고 src 폴더 안에서만 찾을 수 있게 경로 입력
+        // src 안의 모든 하위 경로 , 그리고 모든 ts 파일들을 여기에서만 찾게끔 설정
+    ]
+}
+// 첫 테스트는 여기서 이제 tsc -w 입력해서 watch mode 적용시켜주면 처음 컴파일된후 파일이 들어간 것 확인 가능
+// tsc -w 가 적용되어 있으면 src 폴더 바깥에서 ts 파일을 생성하면 바로 js파일로 컴파일을 해주는데 그것을 막기위한 옵션이 target 밑에 작성
